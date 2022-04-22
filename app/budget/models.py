@@ -17,7 +17,7 @@ class LibraBudget(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return f"{self.added_by} and {self.reason} and {self.location}"
+        return f"{self.added_by} and {self.location}"
     
      
 
