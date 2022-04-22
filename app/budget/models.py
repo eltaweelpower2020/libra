@@ -5,6 +5,7 @@ class LibraBudget(models.Model):
     SITES = (
         ('6 OCTOBER', '6 OCTOBER SITE'),
         ('ABOU AWAIKE', 'ABOU AWAIKEL SITE'),
+        ('Libra', 'Libra Company'),
     )
     added_by=models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     money_from=models.CharField(max_length=200)
