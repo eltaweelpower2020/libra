@@ -93,7 +93,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'libratracking',
+            'NAME': 'postgres',
             'USER': 'postgres',
             'PASSWORD': 'password123',
             'HOST': '/var/run/postgresql',
