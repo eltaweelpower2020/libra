@@ -47,7 +47,7 @@ services:
   proxy:
     container_name: 'mainproxy'
     build: 
-      context: /proxy
+      context: .
     volumes: 
       - static_data:/vol/static
       - ./data/certbot/conf:/etc/letsencrypt
