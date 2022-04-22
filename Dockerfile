@@ -31,7 +31,7 @@ RUN chmod -R 755 /vol/web
 # RUN chown -R user:user /app
 # RUN chmod -R 755 /app/db.sqlite3
 
-COPY ./app/media/ /vol/web/media
+# COPY ./app/media/ /vol/web/media
 
 
 # USER user
