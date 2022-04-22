@@ -45,7 +45,7 @@ services:
 
       
   proxy:
-    container_name: 'mainproxy45'
+    container_name: 'mainproxy'
     build: 
       context: ./proxy
     volumes: 
