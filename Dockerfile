@@ -14,7 +14,7 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip \
 
 
 RUN mkdir /app
-COPY ./app /app
+COPY . /app
 
 WORKDIR /app
 
