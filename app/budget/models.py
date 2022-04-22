@@ -15,6 +15,9 @@ class LibraBudget(models.Model):
     location=models.CharField(max_length=20, choices=SITES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f"{self.added_by} and {self.reason} and {self.location}"
     
      
 
