@@ -19,6 +19,7 @@ COPY ./app /app
 WORKDIR /app
 
 COPY ./scripts /scripts
+COPY ./proxy /proxy
 
 RUN chmod +x /scripts/*
 
