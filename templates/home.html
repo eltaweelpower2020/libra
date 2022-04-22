@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{%block title%}Boards {%endblock%}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Libra's Budget</li>
+{%endblock%}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'add_budget_lead' %}" class="btn btn-primary">add budget lead</a>
+</div>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>Created At</th>
+        <th>Date updated</th>
+        <th>Location</th>
+        <th>money from</th>
+        <th>money to</th>
+        <th>amount</th>
+        <th>user</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for budget in budget_all%}
+    <tr>
+        <td>{{budget.created_at}}</td>
+        <td>{{budget.updated_at}}</td>
+        <td>{{budget.location}}</td>
+        <td>{{budget.money_from}}</td>
+        <td>{{budget.money_to}}</td>
+        <td>{{budget.amount}}</td>
+        <td>{{budget.added_by}}</td>
+
+
+    </tr>
+    {%endfor%}
+
+    </tbody>
+</table>
+
+{%endblock%}
+
+
+
+
+
+<td><a href="{% url 'home'%}">{{budget.created_at}}</a>
+    <small class="text-muted d-block">{{board.created_at}}</small>
+    </td>
+<td>
+    {% with post=board.get_last_post%}
+    {%if post%}
+    by {{post.created_by.username}} at {{post.created_dt}}
+   {%else%}
+    <small>No Posts</small>
+    {%endif%}
+    {%endwith%}
+
+</td>
