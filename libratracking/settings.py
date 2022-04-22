@@ -19,12 +19,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_%wbq3gi-ohhxuenszmc$m1(grnq+__m&pr2@j+n8(gw_!eb0l'
+# SECRET_KEY = '_%wbq3gi-ohhxuenszmc$m1(grnq+__m&pr2@j+n8(gw_!eb0l'
+SECRET_KEY = os.environ.get("SECRET_KEY","_%wbq3gi-ohhxuenszmc$m1(grnq+__m&pr2@j+n8(gw_!eb0lkjkjkj")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = bool(int(os.environ.get("DEBUG", 0)))
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ALLOWED_HOSTS_ENV=os.environ.get("ALLOWED_HOSTS")
+if ALLOWED_HOSTS_ENV:
+    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(','))
 
 
 # Application definition
@@ -75,23 +80,26 @@ WSGI_APPLICATION = 'libratracking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'libratracking',
-#         'USER': 'postgres',
-#         'PASSWORD': '000000',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'libratracking',
+            'USER': 'postgres',
+            'PASSWORD': 'password123',
+            'HOST': '/var/run/postgresql',
+            'PORT': 5432,
+        }
+    }
 
 
 # Password validation
@@ -129,11 +137,31 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'static'),
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_URL = '/static/static/'
+MEDIA_URL = '/static/media/'
+
+STATIC_ROOT = '/vol/web/static'
+MEDIA_ROOT = '/vol/web/media'
+
+if DEBUG:
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+
+    STATIC_ROOT = 'static1'
+    MEDIA_ROOT = 'media1'
+    BASE_URL="127.0.0.1:8000"
+else:
+    STATIC_URL = '/static/static/'
+    MEDIA_URL = '/static/media/'
+
+    STATIC_ROOT = '/vol/web/static'
+    MEDIA_ROOT = '/vol/web/media'
+    BASE_URL="188.166.79.129"
+
+
 
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
