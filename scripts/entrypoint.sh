@@ -3,6 +3,7 @@ set -e
 # python manage.py migrate --fake shirts
 python manage.py makemigrations --noinput
 python manage.py migrate --noinput
+python manage.py migrate --fake default
 python manage.py collectstatic --noinput
 
 
