@@ -10,6 +10,15 @@
 <div class="mb-4">
     <a href="{% url 'add_budget_lead' %}" class="btn btn-primary">add budget lead</a>
 </div>
+<div class="row mb-3 text-center">
+    <div class="col-4 text-success">Total Income : {{budget_asset_total}}</div>
+    <div class="col-4 text-danger">Total Outcome : {{budget_salary_total}}</div>
+    {%if profit%}
+    <div class="col-4 text-success">Total Avaliable Budget : {{budget_avaliable_total}}</div>
+    {%else%}
+    <div class="col-4 text-danger">Total Avaliable Budget : {{budget_avaliable_total}}</div>
+    {%endif%}
+</div>
 <table class="table">
     <thead class="thead-dark">
     <tr>
